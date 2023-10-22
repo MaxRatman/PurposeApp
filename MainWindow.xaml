@@ -1,0 +1,38 @@
+﻿<Window x:Class="PurposeApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PurposeApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <DataTemplate x:Key="SubTaskTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="labelNameSubTask" Grid.Column="0" Background="Aqua" Content="{Binding Path=Name}" />
+                <CheckBox x:Name="checkBoxComplete" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0">
+            <Button x:Name="AddButton" Content="Добавить задачу" Margin="5" Click="AddButton_Click" Background="Red"/>
+            <Button x:Name="UsersListButton" Content="Список пользователей" Margin="5" Click="UsersListButton_Click" Background="Green"/>
+            <Button x:Name="InfoButton" Content="Справка" Margin="5" Click="InfoButton_Click" Background="Chocolate"/>
+        </ToolBar>
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <ListBox x:Name="listBoxPurpose" Width="150">
+            </ListBox>
+            <ListView x:Name="listViewSubTask" Width="150" ItemTemplate="{StaticResource SubTaskTemplate}" ></ListView>
+            <TextBox x:Name="textBlock" Background="Red" Width="1000"></TextBox>
+        </StackPanel>
+    </Grid>
+</Window>
