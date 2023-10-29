@@ -17,22 +17,118 @@
                 <CheckBox x:Name="checkBoxComplete" Grid.Column="1"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="UsersItemTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Image x:Name="ImageUser" Grid.Column="0" Grid.Row="0"/>
+                <Label x:Name="LabelNameUser" Grid.Column="1" Grid.Row="0" Content="{Binding Path=Name}"/>
+                <Label x:Name="LabelUsernameUser" Grid.Column="1" Grid.Row="1" Content="{Binding Path=UserName}"/>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
-    <Grid>
+    <Grid x:Name="baseGrid">
+        <Grid x:Name="enterInProgramGrid" Background="Black">
+            <Grid x:Name="choiceEnterInProgramGrid" Margin="230,70" MaxHeight="150" MaxWidth="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Добро пожаловать!" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Center" FontSize="16"/>
+                <Button x:Name="choiceEnter" Margin="2" Content="Войти" Grid.Column="0" Grid.Row="1" Click="choiceEnter_Click"/>
+                <Button x:Name="choiceRegister" Margin="2" Content="Зарегистрироваться" Grid.Column="1" Grid.Row="1" Click="choiceRegister_Click"/>
+            </Grid>
+            <Grid Margin="230,70" x:Name="enterGrid" MaxHeight="300" MaxWidth="300" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textBoxUserNameEnter" Foreground="LightGray" Text="Имя пользователя"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  Margin="20" MaxLines="1"  GotFocus="textBoxEnters_GotFocus" LostFocus="textBoxEnters_LostFocus" />
+                <TextBox x:Name="textBoxPasswordEnter" Foreground="LightGray"  Text="Пароль" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" MaxLines="1"  Margin="20" GotFocus="textBoxEnters_GotFocus" LostFocus="textBoxEnters_LostFocus" />
+                <Button x:Name="buttonEnter"  Height="30" Grid.Column="0" Grid.Row="2" Content="Войти" Click="buttonEnter_Click"/>
+                <Button x:Name="buttonCancelEnter" Grid.Column="1" Height="30" Content="Отмена" Grid.Row="2" Click="buttonCancelEnter_Click"/>
+            </Grid>
+            <Grid Margin="230,70" x:Name="registerGrid" MaxHeight="300" MaxWidth="300" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textBoxNameRegister" Foreground="LightGray" Text="Имя"  MaxLines="1" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  Margin="20" GotFocus="textBoxRegisters_GotFocus" LostFocus="textBoxRegisters_LostFocus" />
+                <TextBox x:Name="textBoxEmailRegister" Foreground="LightGray" Text="Почта" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"  Margin="20" GotFocus="textBoxRegisters_GotFocus" LostFocus="textBoxRegisters_LostFocus"   />
+                <TextBox x:Name="textBoxPasswordRegister" Foreground="LightGray"  Text="Пароль" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"  Margin="20" GotFocus="textBoxRegisters_GotFocus" LostFocus="textBoxRegisters_LostFocus" />
+                <TextBox x:Name="textBoxUserNameRegister" Foreground="LightGray" Text="Имя пользователя"  Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2"  Margin="20"  GotFocus="textBoxRegisters_GotFocus" LostFocus="textBoxRegisters_LostFocus" />
+                <Button x:Name="buttonRegister"  Height="30" Grid.Column="0" Grid.Row="4" Content="Зарегистрироваться" Click="buttonRegister_Click"/>
+                <Button x:Name="buttonCancelRegister" Grid.Column="1" Height="30" Content="Отмена" Grid.Row="4" Click="buttonCancelRegister_Click"/>
+            </Grid>
+        </Grid>
+        <Grid x:Name="PurposeGridBase2" Visibility="Hidden">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ToolBar Grid.Row="0">
-            <Button x:Name="AddButton" Content="Добавить задачу" Margin="5" Click="AddButton_Click" Background="Red"/>
+            <Button x:Name="AddPurposeButton" Content="Добавить задачу" Margin="5" Click="AddPurposeButton_Click" Background="Red"/>
             <Button x:Name="UsersListButton" Content="Список пользователей" Margin="5" Click="UsersListButton_Click" Background="Green"/>
             <Button x:Name="InfoButton" Content="Справка" Margin="5" Click="InfoButton_Click" Background="Chocolate"/>
         </ToolBar>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <ListBox x:Name="listBoxPurpose" Width="150">
+        <ToolBar Grid.Row="1" Background="White">
+            <Button x:Name="ButtonBold"  Height="20" Content="Ж" FontSize="12" Click="ButtonBold_Click"/>
+        </ToolBar>
+        <Grid x:Name="gridTasks" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="listBoxPurpose" Grid.Column="0" Width="150" HorizontalAlignment="Left">
             </ListBox>
-            <ListView x:Name="listViewSubTask" Width="150" ItemTemplate="{StaticResource SubTaskTemplate}" ></ListView>
-            <TextBox x:Name="textBlock" Background="Red" Width="1000"></TextBox>
-        </StackPanel>
+            <ListView x:Name="listViewSubTask" Width="150" Grid.Column="1" HorizontalAlignment="Left" ItemTemplate="{StaticResource SubTaskTemplate}" ></ListView>
+            <TextBox x:Name="textBlock"  Grid.Column="2" ></TextBox>
+        </Grid>
+    </Grid>
+    <Grid Visibility="Hidden" x:Name="gridUsersList" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        <ListView x:Name="listUsers" Grid.Row="0" Visibility="Visible" ItemTemplate="{StaticResource UsersItemTemplate}"/>
+    </Grid>
+    <Grid x:Name="addPurposeGrid" Visibility="Hidden" Background="Transparent">
+            <Grid Width="200" Height="100" Background="Black">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="textBoxNamePurpose" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"  Margin="20" />
+                <Button x:Name="buttonAddPurpose" Height="30" Grid.Column="0" Grid.Row="1" Content="Добавить" Click="buttonAddPurpose_Click"/>
+                <Button x:Name="buttonCancel" Grid.Column="1" Height="30" Content="Отмена" Grid.Row="1" Click="buttonCancelAddPurpose_Click"/>
+            </Grid>
+    </Grid>
     </Grid>
 </Window>

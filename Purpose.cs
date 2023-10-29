@@ -15,9 +15,13 @@ namespace PurposeApp
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Subtask> subtasks { get; set; }
-        public int UserId { get; set; }
+        public List<Subtask> ?subtasks { get; set; }
+        public int? UserId { get; set; }
         public User? UserP { get; set; }
+        public override string ToString()
+        {
+            return Name;
+        }
     }
     public class Subtask
     {
